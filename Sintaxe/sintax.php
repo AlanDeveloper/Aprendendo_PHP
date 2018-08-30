@@ -21,4 +21,35 @@
 
     $i = 0;
     while ($i < 10) {echo $i++;}
+
+
+
+    $a = 1;
+    $b = 4;
+    function soma ($a, $b) {
+        return $a + $b;
+    }
+
+    function troca ($a, $b) {
+        $aux = $b;
+        $b = $a;
+        $a = $aux;
+        echo $a, $b;
+    }
+    // Não modifica valores iniciais das variáveis
+    
+    function troca2 (&$a, &$b) {
+        $aux = $b;
+        $b = $a;
+        $a = $aux;
+        echo $a, $b;
+    }
+    // Modifica valores iniciais das variáveis
+
+    require(teste.php);
+    include(teste.php);
+
+    require_once(teste.php);
+    include_once(teste.php);
+
 ?>
