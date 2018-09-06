@@ -92,6 +92,18 @@
     }
 ?>
 <?php
+    // Resolução da data criada
+    function Data2 ($time) {
+        $d_atual = new DateTime();
+        // print_r($d_atual);
+
+        $data = new DateTime($time);
+
+        $int = $d_atual->diff($data);
+        echo '<br> Dias :' . $int->days . ' Meses:' . $int->m. ' Anos: ' . $int->y;
+    }
+
+    //  Resolução com a data sendo string
     function Data($data) {
         $anos = substr($data, strlen($data) - 4, strlen($data));
         $meses = intval(substr($data, strlen($data) - 7, strlen($data) - 8)) * (intval($anos) * 12);
@@ -110,15 +122,24 @@
 ?>
 
 <?php
-    Após peça para o usuário digitar um nome para que seja feita uma busca
-    nesse vetor (teste valores como Silva e Carlos, por exemplo). O programa deve contar e imprimir as
-    ocorrências. Execute essa busca até que o usuário digite “sair” quando solicitado para inserir um
-    nome.
-    $vet = ['Joao Paulo Ferreira', 'Andre Carlos
-    Silva', 'Carlos Alberto Andrade', 'Jeferson Andrade e Silva', 'Paulo Fernandes Moreira','Vinícius Paulo Fontoura', 'Rui Carlos Silva Ferreira', 'Joao Andrade Cardozo', 'Ana Paula Moreira', 'Carlos Figueiredo Junior'];
 
-    $array  = explode(' ', $nome);
+    $nsei  = array('Joao Paulo Ferreira', 'Andre Carlos Silva');
+    $busca = $_GET['busca'];
+    $cont = 0;
+
+    for ($i=0; $i < strlen($nsei); $i++) { 
+        if (array_search($busca, explode(' ', $nsei[$i])) != NULL) {
+            $cont++;
+            echo $cont;
+        }
+    }
+    if ($cont === 0) {
+        echo 'Nada encontrado';
+    } else {
+        echo $cont;
+    }
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -150,7 +171,10 @@
     <p>Meu nome: 
     <?php String('João Marcos Cavalcante Bezerra')?></p>
     <p>Cebolinha: <?php echo toCebolinha('carro é caro')?></p>
-    <p>Data <?php Data('17/01/2001')?></p>
+    <p>Data <?php Data2('17-01-2001')?></p>
     <p>Asterísco: <?php Recebo('EU ESTOU NA ESCOLA')?></p>
+    <form method="get" action="">
+        Busca no histórico:<input type="text" name="busca" placeholder="Procurar...">
+    </form>
 </body>
 </html>
