@@ -1,20 +1,26 @@
 <?php
-    require 'Arma.php';
+    include_once('Arma.php');
 
     class Soldado {
         private $tipo;
         private $escudo;
-        private $vida = 100;
+        private $vida;
         private $bonus_ataque;
         private $arma;
 
-        public function Soldado($tipo, $escudo, $bônus_ataque = 0, $arma = null) {
+        public function Soldado($tipo, $escudo) {
+            $this->vida = 100;
+            $this->bônus_ataque = 0;
+            $this->arma = null;
+            
             $this->tipo = $tipo;
             $this->escudo = $escudo;
-            $this->bônus_ataque = $bônus_ataque;
-            $this->arma = $arma;
         }
 
+        public function EstouArmado() { 
+            return $this->arma != null ? 'Sim' : 'Não';
+        }
+        
         public function ObterTipo () { return $this->tipo;}
         public function ObterEscudo () { return $this->escudo;}
         public function ObterVida () { return $this->vida;}
@@ -31,7 +37,10 @@
         public function MudarEscudo ($escudo) { return $this->escudo = $escudo;}
         public function MudarVida ($vida) { return $this->vida = $vida;}
         public function MudarBonus_Ataque ($bonus) { return $this->bonus_ataque = $bonus;}
-        public function MudarArma ($arma) { return $this->arma = $arma;}
+        public function MudarArma ($arma) {
+            $this->arma = $arma;
+            return $this->arma->ObterNome();
+        }
 
         // public function EstouVivo() { return $this->vida > 0 ? 'true' : 'false';}
         public function EstouVivo() { 
@@ -39,25 +48,25 @@
         }
 
         public function Ataque($adversario, $tiros) {
-            $PassarBonusPara0e1 = 100;
-            $DanoSofrido = $this->arma->dano * $tiros * ($this->bonus_ataque / $PassarBonusPara0e1);
-            $DanoSofrido = $DanoSofrido - (($PassarBonusPara0e1 - $adversario->escudo) / $PassarBonusPara0e1);
-            $adversario->vida -= $DanoSofrido;
-
-            if ($adversario->vida <= 0) {
-                $adversario->vida = 0;
-                $this->bonus_ataque += 0.05; 
+            if($this->EstouVivo() === 'Sim' && $this->EstouArmado() === 'Sim') {
+                $tiros = $this->arma->Atira($tiros);
+                $DanoSofrido = $this->arma->ObterDano() * $tiros * ($this->bonus_ataque + 1);
+                $escudo = (100 - $adversario->ObterEscudo()) / 100;
+                $DanoSofrido = $DanoSofrido * $escudo;
+                $adversario->MudarVida($adversario->ObterVida() - $DanoSofrido);
+                if ($adversario->ObterVida() <= 0) {
+                    $adversario->MudarVida(0);
+                    $this->bonus_ataque += 0.05; 
+                }
+                return $adversario->ObterTipo() . ' : ' . $adversario->ObterVida();
             }
         }
+        public function Dormir() { if ($this.EstouVivo() === 'Sim') { return $this->vida += 10;}}
 
-        public function Dormir() { if ($this.EstouVivo()) { return $this->vida += 10;}}
-
-        public function EstouArmado() { 
-            return $this->arma != null ? 'Sim' : 'Não';
-        }
+        public function Recarrega($quantidade) { $this->arma->MaisMunicao($quantidade);}
     }
 
-    $PrimeiroSoldado = new Soldado('fuzileiro', 40, 15, $MinhaPrimeiraArma);
+    $PrimeiroSoldado = new Soldado('fuzileiro', 70);
     echo '<br><br>Primeiro Soldado<br>';
     echo '<br>Vida: ' . $PrimeiroSoldado->ObterVida();
     echo '<br>Tipo: ' . $PrimeiroSoldado->ObterTipo();
@@ -65,8 +74,10 @@
     echo '<br>Bônus de Ataque: ' . $PrimeiroSoldado->ObterBonus_Ataque();
     echo '<br>Arma: ' . $PrimeiroSoldado->ObterArma();
     echo '<br>Estou vivo? ' . $PrimeiroSoldado->EstouVivo();
-
-    $SegundoSoldado = new Soldado('guerrilheiro', 25, 30);
+    echo '<br>Mudei de arma: ' . $PrimeiroSoldado->MudarArma($MinhaSegundaArma);
+    $PrimeiroSoldado->Recarrega(30);
+    
+    $SegundoSoldado = new Soldado('guerrilheiro', 60);
     echo '<br><br>Segundo Soldado<br>';
     echo '<br>Vida: ' . $SegundoSoldado->ObterVida();
     echo '<br>Tipo: ' . $SegundoSoldado->ObterTipo();
@@ -74,10 +85,38 @@
     echo '<br>Bônus de Ataque: ' . $SegundoSoldado->ObterBonus_Ataque();
     echo '<br>Arma: ' . $SegundoSoldado->ObterArma();
     echo '<br>Estou vivo? ' . $SegundoSoldado->EstouVivo();
-?>
-<br>
+    echo '<br>Mudei de arma: ' . $SegundoSoldado->MudarArma($MinhaPrimeiraArma);
+    $SegundoSoldado->Recarrega(30);
+    
+    
+    
+    echo '<br><br>' . $SegundoSoldado->Ataque($PrimeiroSoldado, 10);
+    echo '<br><br>' . $SegundoSoldado->Ataque($PrimeiroSoldado, 10);
+    echo '<br><br>' . $SegundoSoldado->Ataque($PrimeiroSoldado, 10);
 
-<!-- - trocaArma (arma) -->
-<!-- - armado: retorna se o soldado esta armado ou não -->
-<!-- Testes: Crie 2 soldados, armas e faça um atacar o outro 3 vezes. Teste se após cada
-ataque estão vivos. Troque a arma de cada um e realize mais 2 ataques... -->
+    echo '<br><br>' . $PrimeiroSoldado->Ataque($SegundoSoldado, 10);
+    echo '<br><br>' . $PrimeiroSoldado->Ataque($SegundoSoldado, 10);
+    echo '<br><br>' . $PrimeiroSoldado->Ataque($SegundoSoldado, 10);
+
+
+    echo '<br><br>Primeiro Soldado<br>';
+    echo '<br>Vida: ' . $PrimeiroSoldado->ObterVida();
+    echo '<br>Tipo: ' . $PrimeiroSoldado->ObterTipo();
+    echo '<br>Escudo: ' . $PrimeiroSoldado->ObterEscudo();
+    echo '<br>Bônus de Ataque: ' . $PrimeiroSoldado->ObterBonus_Ataque();
+    echo '<br>Arma: ' . $PrimeiroSoldado->ObterArma();
+    echo '<br>Estou vivo? ' . $PrimeiroSoldado->EstouVivo();
+    echo '<br>Mudei de arma: ' . $PrimeiroSoldado->MudarArma($MinhaPrimeiraArma);
+    $PrimeiroSoldado->Recarrega(30);
+    
+    echo '<br><br>Segundo Soldado<br>';
+    echo '<br>Vida: ' . $SegundoSoldado->ObterVida();
+    echo '<br>Tipo: ' . $SegundoSoldado->ObterTipo();
+    echo '<br>Escudo: ' . $SegundoSoldado->ObterEscudo();
+    echo '<br>Bônus de Ataque: ' . $SegundoSoldado->ObterBonus_Ataque();
+    echo '<br>Arma: ' . $SegundoSoldado->ObterArma();
+    echo '<br>Estou vivo? ' . $SegundoSoldado->EstouVivo();
+    echo '<br>Mudei de arma: ' . $SegundoSoldado->MudarArma($MinhaSegundaArma);
+    $SegundoSoldado->Recarrega(30);
+    ?>
+<br>

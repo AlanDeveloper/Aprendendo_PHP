@@ -23,36 +23,38 @@
 
         public function Atira($quantidade) {
             if ($quantidade > $this->municao) {
-                 $this->municao = 0;
+                $tiros = $this->municao;
+                $this->municao = 0;
+                return $tiros;
             } else {
                 $this->municao -= $quantidade;
+                return $quantidade;
             }
         }
         public function MaisMunicao($quantidade) {
             $this->municao += $quantidade;
+            return $this->municao;
         }
     }
 
 
-    $MinhaPrimeiraArma = new Arma('m4a1', 3000, 30);
+    $MinhaPrimeiraArma = new Arma('m4a1', 300, 3);
     echo 'Minha Primeira Arma<br>';
     echo '<br>Nome: ' . $MinhaPrimeiraArma->ObterNome();
     echo '<br>Dano: ' . $MinhaPrimeiraArma->ObterDano();
     echo '<br>Preco: ' . $MinhaPrimeiraArma->ObterPreco();
     echo '<br>Munição: ' . $MinhaPrimeiraArma->ObterMunicao();
-    echo $MinhaPrimeiraArma->MaisMunicao(30);
-    echo '<br>Comprando munição: ' . $MinhaPrimeiraArma->ObterMunicao();
-    echo $MinhaPrimeiraArma->Atira(20);
+    echo '<br>Comprando munição: ' . $MinhaPrimeiraArma->MaisMunicao(30);
+    echo '<br>Atirada: ' . $MinhaPrimeiraArma->Atira(20);
     echo '<br>Munição: ' . $MinhaPrimeiraArma->ObterMunicao();
 
-    $MinhaSegundaArma = new Arma('ak47', 3500, 35);
+    $MinhaSegundaArma = new Arma('ak47', 350, 3.5);
     echo '<br><br>Minha Segunda Arma<br>';
     echo '<br>Nome: ' . $MinhaSegundaArma->ObterNome();
     echo '<br>Dano: ' . $MinhaSegundaArma->ObterDano();
     echo '<br>Preco: ' . $MinhaSegundaArma->ObterPreco();
     echo '<br>Munição: ' . $MinhaSegundaArma->ObterMunicao();
-    echo $MinhaSegundaArma->MaisMunicao(30);
-    echo '<br>Comprando munição: ' . $MinhaSegundaArma->ObterMunicao();
-    echo $MinhaSegundaArma->Atira(20);
+    echo '<br>Comprando munição: ' . $MinhaSegundaArma->MaisMunicao(50);
+    echo '<br>Atirada: ' . $MinhaSegundaArma->Atira(60);
     echo '<br>Munição: ' . $MinhaSegundaArma->ObterMunicao();
 ?>
