@@ -48,7 +48,7 @@
         public function AlimentarSoldados() {
             $SoldadosAlimentados = 0;
             $SoldadosNãoAlimentados = 0;
-            for ($i=0; $i < count($this->lista_soldados) ; $i++) {
+            for ($i=0; $i < count($this->lista_soldados); $i++) {
                 if($this->ObterAlimentos() >= 10) {
                     $this->EscolherSoldado($i)->MudarVida($this->EscolherSoldado($i)->ObterVida() + 10);
                     $this->MudarAlimentos($this->ObterAlimentos() - 10);
@@ -81,7 +81,7 @@
 
         public function SoldadosDormir () {
             for ($i=0; $i < $this->ObterLista_Soldados(); $i++) { 
-                $this->lista_soldados[$i]->Dormir();
+                $this->EscolherSoldado($i)->Dormir();
             }
             return 'Soldados dormiram';
         }
@@ -105,5 +105,5 @@
     echo '<br>' . $PrimeiraTropa->ComprarArma($MinhaPrimeiraArma, $PrimeiraTropa->EscolherSoldado(0));
     // echo '<br>' . $PrimeiraTropa->Status();
 
-    echo '<br>' . $PrimeiraTropa->SoldadosDormir(); 
+    // echo '<br>' . $PrimeiraTropa->SoldadosDormir(); 
 ?>
