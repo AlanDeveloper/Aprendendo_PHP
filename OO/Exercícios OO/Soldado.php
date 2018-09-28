@@ -17,7 +17,7 @@
             $this->escudo = $escudo;
         }
 
-        public function EstouArmado() { 
+        public function EstouArmado() {
             return $this->arma != null ? 'Sim' : 'Não';
         }
         
