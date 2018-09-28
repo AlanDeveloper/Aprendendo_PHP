@@ -19,7 +19,7 @@
         public function ObterNome () { return $this->nome;}
         public function ObterAlimentos () { return $this->quantidade_alimentos;}
         public function ObterDinheiro () { return $this->dinheiro;}
-        public function ObterLista_Soldados () { return $this->lista_soldados;}
+        public function ObterLista_Soldados () { return count($this->lista_soldados);}
 
         public function MudarNome ($nome) { return $this->nome = $nome;}
         public function MudarDinheiro ($dinheiro) { return $this->dinheiro = $dinheiro;}
@@ -32,7 +32,7 @@
 
         public function Recruta($soldado) {
             array_push($this->lista_soldados, $soldado);
-            return $this->lista_soldados[count($this->ObterLista_Soldados()) - 1]->ObterTipo() . ' recrutado';
+            return $this->lista_soldados[$this->ObterLista_Soldados() - 1]->ObterTipo() . ' recrutado';
         }
         public function Demite($soldado) {
             if(array_search($soldado, $this->lista_soldados) === false) {
