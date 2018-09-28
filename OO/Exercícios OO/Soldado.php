@@ -61,7 +61,7 @@
                 return $adversario->ObterTipo() . ' : ' . $adversario->ObterVida();
             }
         }
-        public function Dormir() { if ($this.EstouVivo() === 'Sim') { return $this->vida += 10;}}
+        public function Dormir() { if ($this->EstouVivo() === 'Sim') { return $this->vida += 10;}}
 
         public function Recarrega($quantidade) { $this->arma->MaisMunicao($quantidade);}
     }
