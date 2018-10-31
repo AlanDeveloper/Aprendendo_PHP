@@ -12,8 +12,8 @@
         }
 
         public function ObterNome($nome) { return $this->nome;}
-        public function ObterEmail($email) { return $this->email;}
         public function ObterCpf($cpf) { return $this->cpf;}
+        public function ObterEmail($email) { return $this->email;}
         public function MudarNome($nome) { $this->nome = $nome;}
         public function MudarEmail($email) { $this->email = $email;}
     }
