@@ -15,7 +15,8 @@
     <title>Atualização de dados</title>
 </head>
 <body>
-    <h3>Atualizar dados</h3>
+    <h3>Atualizar dados</h3> Seu código: 
+    <?php echo '<label type="text" name="cg">' . $_POST['codigo'] .' </label>'?> <br><br>
     <form action="atualiza(1).php" method="post">
         <?php
             echo 'Nome: <input type="text" name="nome" placeholder="Nome" value="' . $cli->ObterNome() .'"><br><br>

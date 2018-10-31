@@ -38,13 +38,13 @@
     </form><br><br>
     <form action="atualiza.php" method="post">
         <label for="">Código:</label>
-        <input type="text" name="codigo" placeholder="Informe seu código">
+        <input type="text" name="codigo" placeholder="Informe o código">
         <button id="btn">Atualize seus dados</button>
     </form><br>
     <h3>Excluir cliente</h3>
     <form action="deleta.php" method="post">
         <label for="">Código: </label>
-        <input type="number" name="codigo">
+        <input type="number" name="codigo" placeholder="Informe o código">
         <button type="submit">Excluir</button>
     </form>
     <h3>Clientes cadastrados</h3>

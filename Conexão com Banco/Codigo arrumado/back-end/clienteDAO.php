@@ -46,10 +46,10 @@
             // codcliente fixo, só é possível adiocionar uma vez se não mudar o número 12
             pg_close($MeuBD);
         }
-        public function AtualizarCliente($cli) {
+        public function AtualizarCliente($cli, $codigo) {
             $MeuBD = $this->ConectarAoBanco();
             $sql = 'update cliente set nome = $1, cpf = $2, email = $3
-            where codcliente = ' . $cli->ObterCodigo();
+            where codcliente =' . $codigo;
             pg_query_params($MeuBD, $sql, array($cli->ObterNome(), $cli->ObterCpf(), $cli->ObterEmail())); 
             pg_close($MeuBD);
         }

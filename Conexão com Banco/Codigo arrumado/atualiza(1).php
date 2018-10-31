@@ -4,6 +4,7 @@
 
     $banco = new ClienteDAO();
     $cli = new Cliente($_POST['nome'], $_POST['cpf'], $_POST['email']);
-    $banco->AtualizarCliente($cli);
-    header('Location: principal.php');
+    echo $_POST['cg'];
+    // $banco->AtualizarCliente($cli, $_POST['codigo']);
+    // header('Location: principal.php');
 ?>
