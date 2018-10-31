@@ -3,7 +3,7 @@
         private $nome;
         private $cpf;
         private $email;
-        private  $codigo;
+        private $codigo;
 
         public function Cliente($nome, $cpf, $email) {
             $this->nome = $nome;
@@ -11,10 +11,12 @@
             $this->email = $email;
         }
 
-        public function ObterNome($nome) { return $this->nome;}
-        public function ObterCpf($cpf) { return $this->cpf;}
-        public function ObterEmail($email) { return $this->email;}
+        public function ObterNome() { return $this->nome;}
+        public function ObterCpf() { return $this->cpf;}
+        public function ObterEmail() { return $this->email;}
+        public function ObterCodigo() { return $this->codigo;}
         public function MudarNome($nome) { $this->nome = $nome;}
+        public function MudarCpf($cpf) { $this->cpf = $cpf;}
         public function MudarEmail($email) { $this->email = $email;}
     }
 ?>

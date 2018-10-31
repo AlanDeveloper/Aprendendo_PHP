@@ -35,8 +35,12 @@
         <input type="number" name="cpf" placeholder="xxx.xxx.xxx-xx">
         <input type="email" name="email" placeholder="...@...">
         <button type="submit">Enviar</button>
-    </form>
-    <br>
+    </form><br><br>
+    <form action="atualiza.php" method="post">
+        <label for="">Código:</label>
+        <input type="text" name="codigo" placeholder="Informe seu código">
+        <button id="btn">Atualize seus dados</button>
+    </form><br>
     <h3>Excluir cliente</h3>
     <form action="deleta.php" method="post">
         <label for="">Código: </label>
