@@ -50,8 +50,10 @@
     <h3>Clientes cadastrados</h3>
     <table>
         <tr>
-            <th>Cliente</th>
             <th>Código</th>
+            <th>Cliente</th>
+            <th>Cpf</th>
+            <th>Email</th>
         </tr>
         <?php $banco->ObterClientes();?>
     </table>

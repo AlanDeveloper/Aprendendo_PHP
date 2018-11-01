@@ -12,8 +12,10 @@
                 // echo $cliente['nome'];
                 echo 
                 '<tr>
-                    <td>' . $cliente['nome'] . '</td>
                     <td>' . $cliente['codcliente'] . '</td>
+                    <td>' . $cliente['nome'] . '</td>
+                    <td>' . $cliente['cpf'] . '</td>
+                    <td>' . $cliente['email'] . '</td>
                 </tr>';
             }
             pg_close($MeuBD);
