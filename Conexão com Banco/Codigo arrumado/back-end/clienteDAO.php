@@ -41,9 +41,8 @@
         }
         public function AdicionarCliente($cli) {
             $MeuBD = $this->ConectarAoBanco();
-            $sql2 = 'insert into cliente (codcliente, nome, cpf, email) values ($1, $2, $3, $4)';
-            pg_query_params($MeuBD, $sql2, array(13, $cli->ObterNome(), $cli->ObterCpf(), $cli->ObterEmail()));
-            // codcliente fixo, só é possível adiocionar uma vez se não mudar o número 12
+            $sql = 'insert into cliente (nome, cpf, email) values ($1, $2, $3)';
+            pg_query_params($MeuBD, $sql, array($cli->ObterNome(), $cli->ObterCpf(), $cli->ObterEmail()));
             pg_close($MeuBD);
         }
         public function AtualizarCliente($cli, $codigo) {

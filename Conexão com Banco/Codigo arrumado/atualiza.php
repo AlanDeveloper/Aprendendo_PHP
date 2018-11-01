@@ -5,6 +5,10 @@
     $banco = new ClienteDAO();
     $cli = $banco->ObterCliente($_POST['codigo']);
     $cli = new Cliente($cli['nome'], $cli['cpf'], $cli['email']);
+    $codigo = $_POST['codigo'];
+    // echo $_POST['codigo'];
+    session_start();
+    $_SESSION['codigo'] = $_POST['codigo'];
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -15,8 +19,8 @@
     <title>Atualização de dados</title>
 </head>
 <body>
-    <h3>Atualizar dados</h3> Seu código: 
-    <?php echo '<label type="text" name="cg">' . $_POST['codigo'] .' </label>'?> <br><br>
+    <h3>Atualizar dados</h3> Seu código:
+    <label> <?php print $_POST['codigo'];?></label><br><br>
     <form action="atualiza(1).php" method="post">
         <?php
             echo 'Nome: <input type="text" name="nome" placeholder="Nome" value="' . $cli->ObterNome() .'"><br><br>
