@@ -6,10 +6,10 @@
         $banco = 'port=5432 dbname=bdmeta user=postgres password=postgres';
             return pg_connect($banco);
         }
-        public function InserirMeta($meta) {
+        public function InserirMeta($meta, $cpf) {
             $MeuBD = $this->ConectarAoBanco();
-            $sql = 'insert into meta (id, nome, descricao, prioridade) values ($1, $2, $3, $4)';
-            pg_query_params($MeuBD, $sql, array($meta->getId(), $meta->getNome(), $meta->getDescricao(), $meta->getPrioridade()));
+            $sql = 'insert into meta (cpfuser, dtprevisao, nome ,descricao, prioridade) values ($1, TO_DATE($2, "YYYY-MM-DD"), $3, $4, $5)';
+            pg_query_params($MeuBD, $sql, array($cpf, $meta->getPrevisao(), $meta->getNome(), $meta->getDescricao(), $meta->getPrioridade()));
             pg_close($MeuBD);
         }
         public function DeletarMeta($id) {

@@ -6,15 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
         textarea { display: block;}
-        input { width: 125px;}
+        input { width: 258px;}
+        #data { width: 135px;}
     </style>
     <title>Página inicial</title>
 </head>
 <body>
     <h3>Inserir Meta</h3>
     <form action="inserir.php" method="post">
-        <input type="text" name="nome" placeholder="Nome da meta">
-        <input type="number" name="id" placeholder="Id"><br><br>
+        <input type="text" name="nome" placeholder="Nome da meta"><br><br>
+        <input type="text" name="cpf" placeholder="Cpf"><br><br>
         <textarea name="descricao" id="" cols="30" rows="10" placeholder="Descrição.."></textarea><br><br>
         <select name="prioridade" id="">
             <option value="1">1</option>
@@ -23,7 +24,9 @@
             <option value="4">4</option>
             <option value="5">5</option>
         </select>
+        <h3>Previsão para cumprir:</h3>
+        <input type="date" name="dtprevisao" id="data">
         <button type="submit">Inserir</button>
-    </form> 
+    </form>
 </body>
 </html>
