@@ -1,0 +1,7 @@
+123;alan;1200
+123;a;1200
+54;al;1222
+;sda;
+;sads;
+;asadsa;
+;asadsa;
